@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "medusa build",
-    "start": "medusa db:migrate && medusa start",
+    "start": "NODE_OPTIONS=--max-old-space-size=1536 medusa db:migrate && NODE_OPTIONS=--max-old-space-size=1536 medusa start",
     "dev": "medusa develop",
     "seed": "medusa exec ./src/scripts/seed.ts",
     "import:catalog": "ts-node --project tsconfig.json src/scripts/import-catalog.ts",
