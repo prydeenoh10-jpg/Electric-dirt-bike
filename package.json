@@ -1,0 +1,33 @@
+{
+  "name": "ebmx-backend",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "medusa build",
+    "start": "cd .medusa/server && npm install && npx medusa db:migrate && npx medusa start",
+    "dev": "medusa develop",
+    "seed": "medusa exec ./src/scripts/seed.ts",
+    "import:catalog": "ts-node --project tsconfig.json src/scripts/import-catalog.ts",
+    "enable:stripe": "ts-node --project tsconfig.json src/scripts/enable-stripe.ts",
+    "setup:shipping": "medusa exec ./src/scripts/setup-shipping.ts",
+    "link:inventory": "ts-node --project tsconfig.json src/scripts/link-inventory.ts",
+    "fix:product-shipping": "medusa exec ./src/scripts/fix-product-shipping.ts",
+    "dedup:products": "ts-node --project tsconfig.json src/scripts/dedup-products.ts",
+    "fix:prices": "ts-node --project tsconfig.json src/scripts/fix-prices.ts"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@medusajs/admin-sdk": "^2.17.1",
+    "@medusajs/framework": "^2.17.1",
+    "@medusajs/medusa": "^2.17.1",
+    "@medusajs/payment-stripe": "^2.17.1",
+    "resend": "^6.16.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "ts-node": "^10.9.2",
+    "typescript": "^5"
+  }
+}
