@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "medusa build",
-    "start": "cd .medusa/server && npm install && npx medusa db:migrate && npx medusa start",
+    "start": "medusa db:migrate && medusa start",
     "dev": "medusa develop",
     "seed": "medusa exec ./src/scripts/seed.ts",
     "import:catalog": "ts-node --project tsconfig.json src/scripts/import-catalog.ts",
