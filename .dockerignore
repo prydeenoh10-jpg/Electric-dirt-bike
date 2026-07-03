@@ -1,0 +1,8 @@
+node_modules
+.medusa
+dist
+.env
+.env.*
+*.log
+catalog-export.json
+catalog-import.csv
