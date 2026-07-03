@@ -20,8 +20,6 @@ COPY --from=builder /app/.medusa/server ./
 
 RUN npm install --production
 
-EXPOSE 9000
-
 ENV NODE_ENV=production
 ENV HOST=0.0.0.0
 ENV NODE_OPTIONS=--max-old-space-size=1536

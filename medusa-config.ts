@@ -17,6 +17,8 @@ module.exports = defineConfig({
     redisUrl: process.env.REDIS_URL,
 
     http: {
+      port: Number(process.env.PORT) || 9000,
+      host: process.env.HOST ?? '0.0.0.0',
       storeCors: process.env.STORE_CORS!,
       adminCors: process.env.ADMIN_CORS!,
       authCors: process.env.AUTH_CORS!,
