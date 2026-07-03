@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "medusa build",
-    "start": "cd .medusa/server && npm install && NODE_OPTIONS=--max-old-space-size=1536 npx medusa start",
+    "start": "cd .medusa/server && npm install && npx medusa start",
     "dev": "medusa develop",
     "seed": "medusa exec ./src/scripts/seed.ts",
     "import:catalog": "ts-node --project tsconfig.json src/scripts/import-catalog.ts",
