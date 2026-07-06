@@ -7,8 +7,8 @@
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "outDir": "./dist",
-    "rootDir": "./src",
+    "outDir": "./.medusa/server",
+    "rootDir": ".",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": false,
@@ -17,6 +17,6 @@
     "experimentalDecorators": true,
     "resolveJsonModule": true
   },
-  "include": ["src"],
+  "include": ["src", "medusa-config.ts"],
   "exclude": ["node_modules", "dist", ".medusa"]
 }
