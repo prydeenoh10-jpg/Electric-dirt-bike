@@ -1,4 +1,9 @@
-FROM node:20-slim AS builder
+# Mirrors the Railway Medusa v2 boilerplate approach (rpuls/medusajs-2.0-for-railway-boilerplate):
+#   build  → medusa build, then npm install --production inside .medusa/server
+#   start  → cd .medusa/server && medusa start
+# Single-stage keeps the pattern simple and avoids cross-stage COPY path issues.
+
+FROM node:20-slim
 
 WORKDIR /app
 
@@ -7,24 +12,14 @@ RUN npm ci
 
 COPY . .
 
+# medusa build outputs compiled server + admin to .medusa/server
 RUN NODE_OPTIONS=--max-old-space-size=1536 npm run build
 
-# Hard-fail if build didn't produce the expected output.
-# Catches stale cache hits where .medusa/server is empty or missing.
-RUN test -f /app/.medusa/server/medusa-config.js || \
-    { echo "ERROR: medusa build did not produce /app/.medusa/server/medusa-config.js"; exit 1; }
-
-# ── Production image ──────────────────────────────────────────────────────────
-FROM node:20-slim
-
-WORKDIR /app
-
-# Copy contents of .medusa/server to /app root so medusa start finds
-# medusa-config.js at process.cwd() and recognises this as a project.
-COPY --from=builder /app/.medusa/server ./
-
-RUN npm install --production
+# Install production deps inside the build output (Railway postBuild equivalent)
+RUN cd .medusa/server && npm install --production
 
 ENV NODE_ENV=production
 
-CMD ["sh", "-c", "npx medusa start -H 0.0.0.0 -p ${PORT:-9000}"]
+# Railway template: cd .medusa/server && medusa start --verbose
+# Port and host via CLI flags so Render/Railway $PORT is respected.
+CMD ["sh", "-c", "cd /app/.medusa/server && npx medusa start --verbose -H 0.0.0.0 -p ${PORT:-9000}"]
