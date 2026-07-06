@@ -15,6 +15,8 @@ COPY . .
 # medusa build outputs compiled server + admin to .medusa/server
 RUN NODE_OPTIONS=--max-old-space-size=3072 npm run build
 
+RUN ls -la /app && ls -la /app/.medusa 2>/dev/null || echo "no .medusa" && find /app -name "medusa-config*" -maxdepth 4 2>/dev/null
+
 # Install production deps inside the build output (Railway postBuild equivalent)
 RUN cd .medusa/server && npm install --production
 
