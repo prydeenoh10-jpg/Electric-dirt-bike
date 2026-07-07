@@ -13,7 +13,8 @@
     "link:inventory": "ts-node --project tsconfig.json src/scripts/link-inventory.ts",
     "fix:product-shipping": "medusa exec ./src/scripts/fix-product-shipping.ts",
     "dedup:products": "ts-node --project tsconfig.json src/scripts/dedup-products.ts",
-    "fix:prices": "ts-node --project tsconfig.json src/scripts/fix-prices.ts"
+    "fix:prices": "ts-node --project tsconfig.json src/scripts/fix-prices.ts",
+    "set:inventory": "ts-node --project tsconfig.json src/scripts/set-inventory-levels.ts"
   },
   "engines": {
     "node": ">=20"
